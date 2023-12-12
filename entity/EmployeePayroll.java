@@ -5,9 +5,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class EmployeePayroll {
+    /**
+     * Private data members
+     */
     private int id;
     private String employeeName;
     private long salary;
+
+    /**
+     * Reading input from console
+     * @throws IOException
+     */
     public void readFromConsole() throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Enter the employee ID:");
