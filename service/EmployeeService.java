@@ -2,8 +2,9 @@ package employee.javaFileIO.service;
 
 import employee.javaFileIO.entity.EmployeePayroll;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class EmployeeService {
     public void run() throws IOException {
@@ -13,6 +14,25 @@ public class EmployeeService {
         System.out.println("Employee Details: ");
         employeePayroll.writeToConsole();
         writeInFile(employeePayroll);
+        printPayrollFile();
+        showEntries();
+    }
+
+    /**
+     * Count entries in employee.txt
+     * @throws IOException
+     */
+    private void showEntries() throws IOException {
+        long cnt = Files.lines(Paths.get("G:\\GE-work\\employeePayroll\\src\\main\\java\\employee\\javaFileIO\\employee.txt")).count();
+        System.out.println("Entries are : "+cnt);
+    }
+
+    private void printPayrollFile() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader("G:\\GE-work\\employeePayroll\\src\\main\\java\\employee\\javaFileIO\\employee.txt"));
+        String line;
+        while ((line = reader.readLine())!=null){
+            System.out.println(line);
+        }
     }
 
     /**
@@ -27,4 +47,5 @@ public class EmployeeService {
         writer.write("Salary : "+employeePayroll.salary+"\n");
         writer.close();
     }
+
 }
