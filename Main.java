@@ -10,18 +10,18 @@ public class Main {
     public static void main(String[] args) throws IOException {
         EmployeeService service = new EmployeeService();
         service.run();
-        String path ="G:\\GE-work\\employeePayroll\\src\\main\\java\\employee\\javaFileIO";
-        if(checkFileExists(path)){
-            System.out.println("File Exists");
-            deleteFile(path);
-        }
-        else {
-            System.out.println("File Does not exist");
-        }
-        createDirectory(path);
-        createEmptyFile(path);
-        listFilesDir(path);
-        listFilesWithExtension(path);
+//        String path ="G:\\GE-work\\employeePayroll\\src\\main\\java\\employee\\javaFileIO";
+//        if(checkFileExists(path)){
+//            System.out.println("File Exists");
+//            deleteFile(path);
+//        }
+//        else {
+//            System.out.println("File Does not exist");
+//        }
+//        createDirectory(path);
+//        createEmptyFile(path);
+//        listFilesDir(path);
+//        listFilesWithExtension(path);
     }
 
     /**

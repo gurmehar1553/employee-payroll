@@ -8,9 +8,9 @@ public class EmployeePayroll {
     /**
      * Private data members
      */
-    private int id;
-    private String employeeName;
-    private long salary;
+    public int id;
+    public String employeeName;
+    public long salary;
 
     /**
      * Reading input from console
