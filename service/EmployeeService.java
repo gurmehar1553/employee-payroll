@@ -16,6 +16,15 @@ public class EmployeeService {
         writeInFile(employeePayroll);
         printPayrollFile();
         showEntries();
+        readFile();
+    }
+
+    private void readFile() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader("G:\\GE-work\\employeePayroll\\src\\main\\java\\employee\\javaFileIO\\employee.txt"));
+        String line;
+        while ((line = reader.readLine())!=null){
+            System.out.println(line);
+        }
     }
 
     /**
