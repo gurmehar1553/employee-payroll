@@ -11,15 +11,26 @@ import static java.nio.file.StandardWatchEventKinds.*;
 public class WatchServiceDemo {
     private final WatchService watcher;
     private final Map<WatchKey,Path> dirWatchers;
+
+    /**
+     * Initialising watcher and dirWatchers
+     * @param dir
+     * @throws IOException
+     */
     WatchServiceDemo(Path dir) throws IOException {
         this.watcher = FileSystems.getDefault().newWatchService();
         this.dirWatchers = new HashMap<>();
         scanRegisterDir(dir);
     }
 
+    /**
+     * Scanning its subdirectories
+     * @param start
+     * @throws IOException
+     */
     private void scanRegisterDir(final Path start) throws IOException {
-        Files.walkFileTree(start, new SimpleFileVisitor<>(){
-            public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs){
+        Files.walkFileTree(start, new SimpleFileVisitor<Path>(){
+            public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
                 registerDir(dir);
                 return FileVisitResult.CONTINUE;
             }
@@ -27,10 +38,20 @@ public class WatchServiceDemo {
 
     }
 
+    /**
+     * Registering directories and subdirectories
+     * @param dir
+     * @throws IOException
+     */
     private void registerDir(Path dir) throws IOException {
         WatchKey key=dir.register(watcher,ENTRY_CREATE,ENTRY_DELETE,ENTRY_MODIFY);
         dirWatchers.put(key,dir);
     }
+
+    /**
+     * Process all events
+     * for keys in watcher
+     */
     @SuppressWarnings({"rawtypes","unchecked"})
     public void processEvents(){
         long count=1;
@@ -62,12 +83,6 @@ public class WatchServiceDemo {
                     }
                 } else if (kind.equals(ENTRY_DELETE)) {
                     if (Files.isDirectory(child)) dirWatchers.remove(key);
-                }
-                System.out.println("Keep watching yes/no");
-
-                if(sc.nextLine().toLowerCase().equals("no")){
-                    System.out.println("count : "+ count);
-                    break;
                 }
             }
             //reset key if dir is removed
