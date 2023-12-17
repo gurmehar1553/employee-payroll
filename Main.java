@@ -4,6 +4,8 @@ import employee.javaFileIO.service.EmployeeService;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 
 public class Main {
@@ -22,6 +24,7 @@ public class Main {
         createEmptyFile(path);
         listFilesDir(path);
         listFilesWithExtension(path);
+        new WatchServiceDemo(Paths.get(path)).processEvents();
     }
 
     /**
